@@ -4,39 +4,78 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int Hp = 0;
-    public float Dmg = 0;
-    public float Move = 0f;
-    Animator animator;
-    bool Walk = false;
+    public float Hp;
+    public float damage;
+    public float moveSpeed = 1f;
 
-    void Start()
+    private Animator anima;
+    private bool Walk;
+
+    // Use this for initialization
+    private void Start()
     {
-        animator = GetComponent<Animator>();
+        anima = GetComponent<Animator>();
+        Move();
+
     }
+
+
+
+
     // Update is called once per frame
     void Update()
     {
+        Move();
+    }
 
-        if (Input.GetKey(KeyCode.W))
+    private void Move()
+    {
+        //Y축과 회전 고정
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.position = new Vector3(transform.position.x, -4.44f, transform.position.z);
+        if (Input.GetKey(KeyCode.A))
         {
-            animator.SetTrigger("Walk");
-        }
-        else if (Input.GetKey(KeyCode.A)==true)
-        {
-            transform.position += Vector3.left * Time.deltaTime * Move;
-        }
-        else if (Input.GetKey(KeyCode.S)==true)
-        {
-            transform.position += Vector3.back * Time.deltaTime * Move;
-        }
-        else if (Input.GetKey(KeyCode.D)==true)
-        {
-            transform.position += Vector3.right * Time.deltaTime * Move;
+            Walk = true;
+            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+            anima.SetTrigger("Walk");
         }
         else
         {
             Walk = false;
+            anima.SetTrigger("Idle");
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            Walk = true;
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            anima.SetTrigger("Walk");
+        }
+        else
+        {
+            Walk = false;
+            anima.SetTrigger("Idle");
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            Walk = true;
+            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+            anima.SetTrigger("Walk");
+        }
+        else
+        {
+            Walk = false;
+            anima.SetTrigger("Idle");
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            Walk = true;
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+            anima.SetTrigger("Walk");
+        }
+        else
+        {
+            Walk = false;
+            anima.SetTrigger("Idle");
         }
     }
 }
