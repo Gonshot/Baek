@@ -6,76 +6,85 @@ public class Player : MonoBehaviour
 {
     public float Hp;
     public float damage;
-    public float moveSpeed = 1f;
+    public float moveSpeed = 1.5f;
+    float rotSpeed = 3.0f;
 
-    private Animator anima;
-    private bool Walk;
+    private Animator PlayerAnimation;
 
-    // Use this for initialization
     private void Start()
     {
-        anima = GetComponent<Animator>();
-        Move();
-
+        PlayerAnimation = GetComponent<Animator>();
     }
 
-
-
-
-    // Update is called once per frame
     void Update()
     {
         Move();
+
+        //마우스 좌우 움직임으로 카메라 전환, 회전 X,Z축 고정
+        float MouseX = Input.GetAxis("Mouse X");
+        transform.Rotate(Vector3.up * rotSpeed * MouseX);
     }
 
     private void Move()
     {
-        //Y축과 회전 고정
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        transform.position = new Vector3(transform.position.x, -4.44f, transform.position.z);
+        //Y축 고정
+        transform.position = new Vector3(transform.position.x, -4.24f, transform.position.z);
+
+        // 플레이어 움직임
         if (Input.GetKey(KeyCode.A))
         {
-            Walk = true;
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-            anima.SetTrigger("Walk");
+            PlayerAnimation.SetBool("Walk", true);
         }
-        else
+        if (Input.GetKeyUp(KeyCode.A))
         {
-            Walk = false;
-            anima.SetTrigger("Idle");
+            PlayerAnimation.SetBool("Walk", false);
         }
         if (Input.GetKey(KeyCode.W))
         {
-            Walk = true;
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-            anima.SetTrigger("Walk");
+            PlayerAnimation.SetBool("Walk", true);
         }
-        else
+        if (Input.GetKeyUp(KeyCode.W))
         {
-            Walk = false;
-            anima.SetTrigger("Idle");
+            PlayerAnimation.SetBool("Walk", false);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            Walk = true;
             transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
-            anima.SetTrigger("Walk");
+            PlayerAnimation.SetBool("Walk", true);
         }
-        else
+        if (Input.GetKeyUp(KeyCode.S))
         {
-            Walk = false;
-            anima.SetTrigger("Idle");
+            PlayerAnimation.SetBool("Walk", false);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            Walk = true;
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
-            anima.SetTrigger("Walk");
+            PlayerAnimation.SetBool("Walk", true);
         }
-        else
+        if (Input.GetKeyUp(KeyCode.D))
         {
-            Walk = false;
-            anima.SetTrigger("Idle");
+            PlayerAnimation.SetBool("Walk", false);
+        }
+
+        //플레이어 공격
+        if (Input.GetMouseButtonDown(0))
+        {
+            PlayerAnimation.SetBool("Attack 01", false);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            PlayerAnimation.SetBool("Attack 01", true);
+        }
+        //플레이어 방어
+        if (Input.GetMouseButtonDown(1))
+        {
+            PlayerAnimation.SetBool("Cover", true);
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            PlayerAnimation.SetBool("Cover", false);
         }
     }
 }
