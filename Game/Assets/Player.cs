@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         PlayerAnimation = GetComponent<Animator>();
+        Hp = 5f;
+        damage = 1f;
     }
 
     void Update()
@@ -67,8 +69,7 @@ public class Player : MonoBehaviour
         {
             PlayerAnimation.SetBool("Walk", false);
         }
-
-        //플레이어 공격
+        //공격모션
         if (Input.GetMouseButtonDown(0))
         {
             PlayerAnimation.SetBool("Attack 01", false);
@@ -77,7 +78,7 @@ public class Player : MonoBehaviour
         {
             PlayerAnimation.SetBool("Attack 01", true);
         }
-        //플레이어 방어
+        //방어모션
         if (Input.GetMouseButtonDown(1))
         {
             PlayerAnimation.SetBool("Cover", true);
@@ -86,5 +87,9 @@ public class Player : MonoBehaviour
         {
             PlayerAnimation.SetBool("Cover", false);
         }
+    }
+    public void Attack()
+    {
+
     }
 }
