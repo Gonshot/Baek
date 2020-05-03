@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float Hp;
+    public float isHp;
     public float damage;
     public float moveSpeed = 1.5f;
     float rotSpeed = 3.0f;

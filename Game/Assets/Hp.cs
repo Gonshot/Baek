@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hp : MonoBehaviour
 {
     public GameObject HP;
+    script = GameObject.Find("Player").GetComponent<Player>();
 
     // Update is called once per frame
     void Start()
@@ -18,6 +19,7 @@ public class Hp : MonoBehaviour
 
     private void Update()
     {
-        
+        if (isHp < 5) ;
+        { }
     }
 }
