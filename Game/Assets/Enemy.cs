@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
 
     public int HP = 5;
-    public int damage = 1;
+    public int damage = 2;
     public float moveSpeed = 1f;
 
     private Animator EnemyAnimation;
