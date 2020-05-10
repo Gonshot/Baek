@@ -1,2 +1,2 @@
-C:\Users\Administrator\Desktop\Git\Baek\Game\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-C:\Users\Administrator\Desktop\Git\Baek\Game\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\유니티\BJS\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\유니티\BJS\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

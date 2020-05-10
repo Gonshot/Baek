@@ -37,14 +37,14 @@ public class Player : MonoBehaviour
 
         tr.Translate(moveDir.normalized * moveSpeed * Time.deltaTime, Space.Self);
 
-        
+
         float MouseX = Input.GetAxis("Mouse X");
         transform.Rotate(Vector3.up * rotSpeed * MouseX);
     }
     private void Move()
     {
         //Y축 고정
-        transform.position = new Vector3(transform.position.x, -4.24f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, -0.18f, transform.position.z);
 
         // 플레이어 움직임
         if (Input.GetKey(KeyCode.A))
@@ -97,10 +97,5 @@ public class Player : MonoBehaviour
         {
             PlayerAnimation.SetBool("Cover", false);
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == "Enemy")
-            Debug.Log("닿았습니다.");
     }
 }

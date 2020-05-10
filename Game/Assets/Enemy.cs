@@ -1,69 +1,75 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
 
-    public int HP = 3;
-    public float damage;
+    public int HP = 5;
+    public int damage = 1;
     public float moveSpeed = 1f;
+
+    private Animator EnemyAnimation;
+
+    GameObject _Enemy;
+
+    public Transform target;
+    NavMeshAgent nav;
 
     public void TakeDamage(int damage)
     {
-        HP = HP - damage;
+        HP--;
+        if (HP == 4)
+        {
+            EnemyAnimation.SetTrigger("GetHit");
+        }
+        if (HP == 3)
+        {
+            EnemyAnimation.SetTrigger("GetHit");
+        }
+        if (HP == 2)
+        {
+            EnemyAnimation.SetTrigger("GetHit");
+        }
+        if (HP == 1)
+        {
+            EnemyAnimation.SetTrigger("GetHit");
+        }
+        if (HP == 0)
+        {
+            EnemyAnimation.SetTrigger("Death");
+        }
     }
-
-    public enum State
-    {
-        Idle,
-        Walk,
-        Attack,
-        Cover,
-        GetHit,
-        Death
-    }
-    public Animator anim;
-    public State EnemyState;
     private Rigidbody rigid;
 
     private void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody>();
-        damage = 1f;
+        EnemyAnimation = GetComponent<Animator>();
+
+        _Enemy = GameObject.FindGameObjectWithTag("Player");
+
+        nav = GetComponent<NavMeshAgent>();
+        //Y축 고정
+        transform.position = new Vector3(transform.position.x, -0.18f, transform.position.z);
     }
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, -4.24f, transform.position.z);
+        nav.SetDestination(_Enemy.transform.position);
 
-        switch (EnemyState)
+        AnimationUpdate();
+        if (HP == 0)
         {
-            case State.Idle:
-                break;
-            case State.Walk:
-                break;
-            case State.Attack:
-                break;
-            case State.GetHit:
-                break;
-            case State.Cover:
-                break;
-            case State.Death:
-                break;
-        }
-
-        void ChangeState(State EnemyState)
-        {
-            switch (EnemyState)
-            {
-            }
-            this.EnemyState = EnemyState;
-
-            //스테이트에서 들어가고나서 처음으로 실행되는 Enter()함수;
-            switch (EnemyState)
-            {
-            }
-
+            transform.position = new Vector3(0, -0.18f, 0);
         }
     }
+    void AnimationUpdate()
+    {
+        if (nav.destination != transform.position)
+            EnemyAnimation.SetBool("Walk", true);
+        else
+            EnemyAnimation.SetBool("Walk", false);
+    }
+
 }
