@@ -4,29 +4,43 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float isHp;
-    public float damage;
+    public int isHp = 5;
+    public int damage = 1;
+
+    private float h = 0.0f;
+    private float v = 0.0f;
+    private float r = 0.0f;
+
+    private Transform tr;
+
     public float moveSpeed = 1.5f;
+
     float rotSpeed = 3.0f;
 
+    private Rigidbody myRigid;
     private Animator PlayerAnimation;
 
     private void Start()
     {
+        tr = GetComponent<Transform>();
+        myRigid = GetComponent<Rigidbody>();
         PlayerAnimation = GetComponent<Animator>();
-        Hp = 5f;
-        damage = 1f;
     }
 
     void Update()
     {
         Move();
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
 
-        //마우스 좌우 움직임으로 카메라 전환, 회전 X,Z축 고정
+        Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
+
+        tr.Translate(moveDir.normalized * moveSpeed * Time.deltaTime, Space.Self);
+
+        
         float MouseX = Input.GetAxis("Mouse X");
         transform.Rotate(Vector3.up * rotSpeed * MouseX);
     }
-
     private void Move()
     {
         //Y축 고정
@@ -35,7 +49,6 @@ public class Player : MonoBehaviour
         // 플레이어 움직임
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
             PlayerAnimation.SetBool("Walk", true);
         }
         if (Input.GetKeyUp(KeyCode.A))
@@ -44,7 +57,6 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
             PlayerAnimation.SetBool("Walk", true);
         }
         if (Input.GetKeyUp(KeyCode.W))
@@ -53,7 +65,6 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
             PlayerAnimation.SetBool("Walk", true);
         }
         if (Input.GetKeyUp(KeyCode.S))
@@ -62,7 +73,6 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             PlayerAnimation.SetBool("Walk", true);
         }
         if (Input.GetKeyUp(KeyCode.D))
@@ -72,11 +82,11 @@ public class Player : MonoBehaviour
         //공격모션
         if (Input.GetMouseButtonDown(0))
         {
-            PlayerAnimation.SetBool("Attack 01", false);
+            PlayerAnimation.SetBool("Atk", true);
         }
-        if (Input.GetMouseButtonUp(0))
+        else
         {
-            PlayerAnimation.SetBool("Attack 01", true);
+            PlayerAnimation.SetBool("Atk", false);
         }
         //방어모션
         if (Input.GetMouseButtonDown(1))
@@ -88,8 +98,9 @@ public class Player : MonoBehaviour
             PlayerAnimation.SetBool("Cover", false);
         }
     }
-    public void Attack()
+    private void OnCollisionEnter(Collision collision)
     {
-
+        if (collision.gameObject.name == "Enemy")
+            Debug.Log("닿았습니다.");
     }
 }

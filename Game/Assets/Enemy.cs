@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Enemy : MonoBehaviour
 {
-    GameObject Player;
-    GameObject Sword;
 
-    bool GetHit;
-
-    public float Hp;
+    public int HP = 3;
     public float damage;
     public float moveSpeed = 1f;
+
+    public void TakeDamage(int damage)
+    {
+        HP = HP - damage;
+    }
 
     public enum State
     {
@@ -28,7 +29,6 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody>();
-        Hp = 5f;
         damage = 1f;
     }
     // Update is called once per frame
