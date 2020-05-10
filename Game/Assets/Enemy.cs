@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
         nav.SetDestination(_Enemy.transform.position);
 
         AnimationUpdate();
-        if (HP == 0)
+        if (HP <= 0)
         {
             transform.position = new Vector3(0, -0.18f, 0);
         }
