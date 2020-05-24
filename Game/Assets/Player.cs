@@ -13,12 +13,37 @@ public class Player : MonoBehaviour
 
     private Transform tr;
 
-    public float moveSpeed = 1.5f;
+    public float moveSpeed = 2f;
 
     float rotSpeed = 3.0f;
 
     private Rigidbody myRigid;
     private Animator PlayerAnimation;
+    public void TakeDamage(int damage)
+    {
+        isHp--;
+        //데미지 받았을 시 모션
+        if (isHp == 4)
+        {
+            PlayerAnimation.SetTrigger("GetHit");
+        }
+        if (isHp == 3)
+        {
+            PlayerAnimation.SetTrigger("GetHit");
+        }
+        if (isHp == 2)
+        {
+            PlayerAnimation.SetTrigger("GetHit");
+        }
+        if (isHp == 1)
+        {
+            PlayerAnimation.SetTrigger("GetHit");
+        }
+        if (isHp <= 0)
+        {
+            PlayerAnimation.SetTrigger("Death");
+        }
+    }
 
     private void Start()
     {
@@ -29,6 +54,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //플레이어 이동
         Move();
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
@@ -40,6 +66,11 @@ public class Player : MonoBehaviour
 
         float MouseX = Input.GetAxis("Mouse X");
         transform.Rotate(Vector3.up * rotSpeed * MouseX);
+
+        if (isHp <= 0)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Player"), 5f);
+        }
     }
     private void Move()
     {

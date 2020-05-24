@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
-public class Sword : MonoBehaviour
+public class EnemySword : MonoBehaviour
 {
     Collider mCollider;
-    private float dmgRate = 1.67f;
+    private float dmgRate = 2f;
     private float nextAttack = 0.0f;
+
+    public Transform target;
 
     private void Start()
     {
@@ -18,8 +21,10 @@ public class Sword : MonoBehaviour
     }
     private void Attack()
     {
-        //마우스 왼쪽 버튼 눌렀을 시에 충돌주기(1.67초의 딜레이)
-        if (Input.GetMouseButtonDown(0)&&Time.time>nextAttack)
+        float distance = Vector3.Distance(target.position, transform.position);
+
+        //플레이어랑 가까워 졌을 시 공격(1.67초의 딜레이)
+        if (distance <= 0.38f && Time.time > nextAttack)
         {
             mCollider.enabled = true;
             nextAttack = Time.time + dmgRate;
@@ -29,12 +34,11 @@ public class Sword : MonoBehaviour
             mCollider.enabled = false;
         }
     }
-    //콜라이더 충돌
     void OnTriggerEnter(Collider target)
     {
-        if (target.gameObject.CompareTag("Enemy"))
+        if (target.gameObject.CompareTag("Player"))
         {
-            target.GetComponent<aEnemy>().TakeDamage(1);
+            target.GetComponent<Player>().TakeDamage(1);
         }
     }
 }
