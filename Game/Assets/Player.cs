@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         if (isHp <= 0)
         {
             Destroy(GameObject.FindGameObjectWithTag("Sword"));
-            Destroy(GameObject.FindGameObjectWithTag("Player"), 4.5f);
+            Destroy(GameObject.FindGameObjectWithTag("Player"), 4.3f);
         }
     }
     private void Move()
