@@ -366,7 +366,7 @@ PrefabInstance:
     - target: {fileID: 4968447437888713482, guid: 6880f56883e1c1e45ab78c423a78641d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: 4968447437888713482, guid: 6880f56883e1c1e45ab78c423a78641d,
         type: 3}
@@ -376,7 +376,7 @@ PrefabInstance:
     - target: {fileID: 4968447437888713482, guid: 6880f56883e1c1e45ab78c423a78641d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4968447437888713482, guid: 6880f56883e1c1e45ab78c423a78641d,
         type: 3}
@@ -386,7 +386,7 @@ PrefabInstance:
     - target: {fileID: 4968447437888713482, guid: 6880f56883e1c1e45ab78c423a78641d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4968447437888713482, guid: 6880f56883e1c1e45ab78c423a78641d,
         type: 3}
@@ -401,7 +401,7 @@ PrefabInstance:
     - target: {fileID: 4968447437888713482, guid: 6880f56883e1c1e45ab78c423a78641d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4968447437888713482, guid: 6880f56883e1c1e45ab78c423a78641d,
         type: 3}
@@ -426,7 +426,7 @@ PrefabInstance:
     - target: {fileID: 4968447437888417508, guid: 6880f56883e1c1e45ab78c423a78641d,
         type: 3}
       propertyPath: m_TagString
-      value: Sword
+      value: EnemySword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6880f56883e1c1e45ab78c423a78641d, type: 3}
@@ -447,7 +447,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.1
+  m_Radius: 1.2
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &266035181
 MonoBehaviour:
@@ -461,7 +461,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abdaf857db16cd4c9c9442a27a7d22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mCollider: {fileID: 0}
+  dmgRate: 1.7
+  nextAttack: 0
   target: {fileID: 789101936}
+--- !u!1 &370793542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370793544}
+  - component: {fileID: 370793543}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &370793543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370793542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06884af80faf3a544912809127e75815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &370793544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370793542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.2328978, y: -17.838295, z: 8.353764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &424561899
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +716,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHp: 5
   damage: 1
-  moveSpeed: 2
+  _Collider: {fileID: 789101938}
+  moveSpeed: 3
+--- !u!136 &789101938 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 4968447437888317936, guid: 6880f56883e1c1e45ab78c423a78641d,
+    type: 3}
+  m_PrefabInstance: {fileID: 160573871}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +801,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 1.56, z: -0.78}
+  m_LocalPosition: {x: 0, y: 1.7, z: -0.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 789101936}
@@ -781,6 +834,7 @@ MonoBehaviour:
   HP: 5
   damage: 1
   moveSpeed: 1
+  EnemyAnimation: {fileID: 0}
   target: {fileID: 0}
 --- !u!195 &978066296
 NavMeshAgent:
@@ -796,7 +850,7 @@ NavMeshAgent:
   m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 90
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -912,7 +966,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.1
+  m_Radius: 1.2
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1214521724
 MonoBehaviour:

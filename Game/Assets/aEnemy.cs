@@ -7,16 +7,15 @@ public class aEnemy : MonoBehaviour
 
     public int HP = 5;
     public int damage = 1;
-    public float moveSpeed = 1f;
+    public float moveSpeed = 1f;    
+    public Animator EnemyAnimation;
+    public Transform target;
 
-    private Animator EnemyAnimation;
 
     GameObject _Enemy;
-
-    public Transform target;
     NavMeshAgent nav;
 
-    
+
     //데미지 받을시에 나오는 모션
     public void TakeDamage(int damage)
     {
@@ -50,6 +49,7 @@ public class aEnemy : MonoBehaviour
         rigid = gameObject.GetComponent<Rigidbody>();
         EnemyAnimation = GetComponent<Animator>();
 
+
         _Enemy = GameObject.FindGameObjectWithTag("Player");
 
         nav = GetComponent<NavMeshAgent>();
@@ -67,20 +67,22 @@ public class aEnemy : MonoBehaviour
         //HP 0이 될 경우 네비와 적 5초 딜레이 후 삭제
         if (HP == 0)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Enemy"), 5f);
             Destroy(nav);
+            Destroy(GameObject.FindGameObjectWithTag("EnemySword"));
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"), 7f);
         }
 
         target = GameObject.Find("Player").transform;
-        
+
+
         float distance = Vector3.Distance(target.position, transform.position);
 
         //플레이어랑 가까워질 경우 공격모션
         
-            if (distance <= 1f)
+            if (distance <= 1.5f)
             {
-                EnemyAnimation.SetTrigger("Atk");
-            }
+            EnemyAnimation.SetTrigger("Atk");
+        }
     }
     //안 움직일 경우 이동모션 세팅
     void AnimationUpdate()

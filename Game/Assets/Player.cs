@@ -11,11 +11,15 @@ public class Player : MonoBehaviour
     private float v = 0.0f;
     private float r = 0.0f;
 
+    private float coverRate = 1.0f;
+    private float nextAttack = 0.0f;
+
+    public Collider _Collider;
     private Transform tr;
 
     public float moveSpeed = 2f;
 
-    float rotSpeed = 3.0f;
+    float rotSpeed = 5.0f;
 
     private Rigidbody myRigid;
     private Animator PlayerAnimation;
@@ -69,13 +73,30 @@ public class Player : MonoBehaviour
 
         if (isHp <= 0)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Player"), 5f);
+            Destroy(GameObject.FindGameObjectWithTag("Sword"));
+            Destroy(GameObject.FindGameObjectWithTag("Player"), 4.5f);
         }
     }
     private void Move()
     {
         //Y축 고정
         transform.position = new Vector3(transform.position.x, -0.18f, transform.position.z);
+        if (transform.position.x >= 4.5f)
+        {
+            transform.position = new Vector3 (4.5f, 0.18f, transform.position.z);
+        }
+        if (transform.position.x <=-4.5f)
+        {
+            transform.position = new Vector3(-4.5f, 0.18f, transform.position.z);
+        }
+        if (transform.position.z <= -4.5f)
+        {
+            transform.position = new Vector3(transform.position.x, 0.18f, -4.5f);
+        }
+        if (transform.position.z >= 4.5f)
+        {
+            transform.position = new Vector3(transform.position.x, 0.18f, 4.5f);
+        }
 
         // 플레이어 움직임
         if (Input.GetKey(KeyCode.A))
@@ -123,10 +144,13 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             PlayerAnimation.SetBool("Cover", true);
+            _Collider.enabled = false;
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1) && Time.time > nextAttack)
         {
             PlayerAnimation.SetBool("Cover", false);
+            _Collider.enabled = true;
+            nextAttack = Time.time + coverRate;
         }
     }
 }

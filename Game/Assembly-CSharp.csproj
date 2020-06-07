@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\aEnemy.cs" />
+    <Compile Include="Assets\Cursorlock.cs" />
     <Compile Include="Assets\EnemySword.cs" />
     <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\Sword.cs" />
