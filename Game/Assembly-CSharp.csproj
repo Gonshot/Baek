@@ -63,11 +63,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\aEnemy.cs" />
-    <Compile Include="Assets\Cursorlock.cs" />
-    <Compile Include="Assets\EnemySword.cs" />
-    <Compile Include="Assets\Player.cs" />
-    <Compile Include="Assets\Sword.cs" />
+    <Compile Include="Assets\Script\aEnemy.cs" />
+    <Compile Include="Assets\Script\Cursorlock.cs" />
+    <Compile Include="Assets\Script\EnemySword.cs" />
+    <Compile Include="Assets\Script\Player.cs" />
+    <Compile Include="Assets\Script\Sword.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Administrator/Desktop/B/Baek/Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
